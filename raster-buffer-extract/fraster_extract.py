@@ -74,8 +74,16 @@ def get_all_vals(band, cell_indices, n_sample):
     reshaped_vals = extract_reshape_vals(band, cell_indices, n_sample)
     return reshaped_vals
 
-def full_pt_calc(target_pt, band, ds, sample_pts, stat='mean_max', latlon=True):
+def full_pt_calc(target_pt, ds, sample_pts, stat='mean_max', latlon=True):
     cells = get_all_cells(target_pt, sample_pts, ds, latlon=latlon)
+    rowmin, rowmax = np.min(cells[0]), np.max(cells[0])
+    colmin, colmax = np.min(cells[1]), np.max(cells[1])
+    # Windowed read
+    band = ds.read(1, window=rio.windows.Window.from_slices(
+        (rowmin, rowmax+1), (colmin,colmax+1)
+        ))
+    cells[0] = cells[0] - rowmin
+    cells[1] = cells[1] - colmin
     if stat=='mean_max':
         out = get_all_mean_max(band, cells, sample_pts.shape[1])
     elif stat=='mean':
@@ -96,7 +104,6 @@ def full_pt_calc(target_pt, band, ds, sample_pts, stat='mean_max', latlon=True):
 
 def random_buffer(gdf_coords, ds, radius=20, n_sample=1000, stat='mean', latlon=True):
     sample_pts = generate_points(radius, n_sample)
-    band = ds.read(1)
-    return full_pt_calc(gdf_coords, band, ds, sample_pts, stat=stat, latlon=latlon)
+    return full_pt_calc(gdf_coords, ds, sample_pts, stat=stat, latlon=latlon)
         
 
