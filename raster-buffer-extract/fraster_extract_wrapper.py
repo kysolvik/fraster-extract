@@ -44,8 +44,8 @@ def argparse_init():
         type = int)
     p.add_argument('--stat',
         default = 'mean',
-        choices = ['mean', 'mean_max', 'all', 'count_dict'],
-        help = 'Statistic to calculate. One of: mean, mean_max, all, or count_dict',
+        choices = ['mean', 'mean_max', 'all', 'count_dict', 'mode'],
+        help = 'Statistic to calculate. One of: mean, mean_max, all, count_dict, or mode',
         type = str)
     p.add_argument('--batch_size',
         default=10000,

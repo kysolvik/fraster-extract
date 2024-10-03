@@ -13,6 +13,7 @@ import numpy as np
 import rasterio as rio
 import geopandas as gpd
 import pandas as pd
+from scipy import stats
 from shapely.geometry import Point
 
 def transform_x_to_lon(center_lat, buf_x):
@@ -69,7 +70,7 @@ def get_all_mean(band, cell_indices, n_sample):
     avg =  np.mean(np.unique(reshaped_vals, axis=1), axis=1)
     return avg
 
-def get_all_vals(band, cell_indices, n_sample, latlon=True):
+def get_all_vals(band, cell_indices, n_sample):
     reshaped_vals = extract_reshape_vals(band, cell_indices, n_sample)
     return reshaped_vals
 
@@ -85,6 +86,9 @@ def full_pt_calc(target_pt, band, ds, sample_pts, stat='mean_max', latlon=True):
         vals = get_all_vals(band, cells, sample_pts.shape[1])
         uniq_counts = [np.unique(vals[i], return_counts=True) for i in range(vals.shape[0])]
         out = [dict(zip(u[0], u[1])) for u in uniq_counts]
+    elif stat=='mode':
+        vals = get_all_vals(band, cells, sample_pts.shape[1])
+        out = np.array([stats.mode(vals[i]) for i in range(vals.shape[0])])
     else:
         out = get_all_vals(band, cells, sample_pts.shape[1])
         print('Method not recognizable, returning all cell values')
