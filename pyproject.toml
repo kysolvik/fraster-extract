@@ -21,14 +21,17 @@ dependencies = [
     "numpy",
     "rasterio",
     "geopandas",
-    "Shapely",
-    "argparse"
+    "Shapely"
 ]
+
+[project.scripts]
+fraster-extract = "fe:main"
 
 [project.optional-dependencies]
 examples = [
     "notebook",
     "matplotlib",
+    "rasterstats"
 ]
 
 full = [
