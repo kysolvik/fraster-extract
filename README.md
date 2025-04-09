@@ -6,7 +6,7 @@ NOTE: WORK IN PROGRESS
 
 fraster-extract is a lightweight Python package for quickly computing raster zonal statistics within circular buffers around points.
 
-For installation and use instructions, see Quick Start.
+For installation and use instructions, [go to Quick Start](#quick-start).
 
 ## Why?
 
