@@ -26,6 +26,10 @@ The behavior is not always predictable. Deciding which pixels are included in st
 
 This also has the advantage of providing more predictable inclusion of pixels within the buffer. 
 
+Here's a comparison of the conventional approach vs. the Monte Carlo method and an alternative scanline method which we compare against but is not yet implemented in this package:
+![image](https://github.com/user-attachments/assets/50bca067-36db-4e80-bb72-39d71534617f)
+
+
 ## Quick Start
 
 ### Installation
