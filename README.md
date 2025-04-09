@@ -6,7 +6,7 @@ NOTE: WORK IN PROGRESS
 
 fraster-extract is a lightweight Python package for quickly computing raster zonal statistics within circular buffers around points.
 
-For installation and use instructions, see Quick Start.
+For installation and use instructions, [go to Quick Start](#quick-start).
 
 ## Why?
 
@@ -25,6 +25,9 @@ The behavior is not always predictable. Deciding which pixels are included in st
 2. Extract values at those points (fast).
 
 This also has the advantage of providing more predictable inclusion of pixels within the buffer. 
+
+![image](https://github.com/user-attachments/assets/50bca067-36db-4e80-bb72-39d71534617f)
+
 
 ## Quick Start
 
