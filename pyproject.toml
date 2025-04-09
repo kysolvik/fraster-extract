@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fraster-extract"
+version = "0.0.1"
+authors = [
+  { name="Kylen Solvik", email="kysolvik@gmail.com"}
+]
+description = "Faster raster extracts for circular buffers"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache-2.0",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "numpy",
+    "rasterio",
+    "geopandas",
+    "Shapely",
+    "argparse"
+]
+
+[project.optional-dependencies]
+examples = [
+    "notebook",
+    "matplotlib",
+]
+
+full = [
+    "fraster-extract[examples]"
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/kysolvik/fraster-extract"
+"Bug Tracker" = "https://github.com/kysolvik/fraster-extract/issues"
+
