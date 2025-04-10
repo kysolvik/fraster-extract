@@ -2,14 +2,13 @@
 # -*- coding: utf-8 -*-
 """Extract raster values within buffered geometry centroids.
 
-python3 fraster_extract_wrapper.py --help for list of args
+python3 frasterstats --help for list of args
 
 Example Usage: 
-    python3 fraster_extract_wrapper.py ../data/SJER_example.shp ../data/SJER_lidarCHM.tif ./output.csv 10 --not_latlon 
+    python3 frasterstats ../data/SJER_example.shp ../data/SJER_lidarCHM.tif ./output.csv 10 --not_latlon 
 """
 
 
-import _extract
 import os
 import glob
 import geopandas as gpd
@@ -17,6 +16,8 @@ import re
 import pandas as pd
 import rasterio as rio
 import argparse
+
+from fraster_extract import _stats
 
 
 def argparse_init():
@@ -78,7 +79,7 @@ def main():
     i = 0
     while i < gdf.shape[0]:
         end = min(i+batch_size, gdf.shape[0])
-        all_vals += list(_extract.random_buffer_extract(gdf.iloc[i:end]['geometry'], ds, radius=args.radius, n_sample=args.n_sample,
+        all_vals += list(_stats.random_buffer_extract(gdf.iloc[i:end]['geometry'], ds, radius=args.radius, n_sample=args.n_sample,
                 stat=args.stat, latlon=args.latlon))
         i+=batch_size
 
